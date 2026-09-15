@@ -89,7 +89,7 @@ const modeConfig: Record<string, { icon: React.ReactNode; label: string }> = {
 // Reusable glass card with homepage-style hover
 function MusicCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`rounded-2xl md:rounded-3xl bg-white/40 dark:bg-slate-800/50 backdrop-blur-md border border-white/40 dark:border-white/10 shadow-xl p-4 md:p-6 transition-all duration-700 hover:shadow-2xl hover:scale-[1.01] ${className}`}>
+    <div className={`min-w-0 overflow-hidden rounded-2xl md:rounded-3xl bg-white/40 dark:bg-slate-800/50 backdrop-blur-md border border-white/40 dark:border-white/10 shadow-xl p-4 md:p-6 transition-all duration-700 hover:shadow-2xl hover:scale-[1.01] ${className}`}>
       {children}
     </div>
   );
@@ -174,7 +174,7 @@ export default function MusicPage() {
 
       {/* Hero */}
       <MusicCard className="mb-4 md:mb-6">
-        <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-8">
+        <div className="flex min-w-0 w-full flex-col sm:flex-row items-center gap-4 md:gap-8">
           {/* Vinyl Disc */}
           <div className="relative shrink-0">
             <div className="w-36 h-36 md:w-48 md:h-48 rounded-full bg-gradient-to-br from-slate-900 to-slate-800 shadow-2xl flex items-center justify-center relative overflow-hidden">
@@ -258,7 +258,7 @@ export default function MusicPage() {
             {/* Current lyric - always reserve space to prevent jitter */}
             <div className="mt-3 md:mt-4 h-6 md:h-7 flex items-center">
               {currentLyric && (
-                <span className="text-xs md:text-sm text-indigo-600 dark:text-indigo-300 font-bold italic drop-shadow-sm truncate w-full">
+                <span className="block w-full max-w-full overflow-hidden break-words whitespace-normal text-xs md:text-sm text-indigo-600 dark:text-indigo-300 font-bold italic drop-shadow-sm">
                   &ldquo;{currentLyric}&rdquo;
                 </span>
               )}
@@ -312,7 +312,7 @@ export default function MusicPage() {
             <MusicCard>
               <div
                 ref={lyricContainerRef}
-                className="w-full min-w-0 max-w-full h-[280px] md:h-[400px] overflow-x-hidden overflow-y-auto"
+                className="relative w-full min-w-0 max-w-full overflow-hidden h-[280px] md:h-[400px] overflow-y-auto"
                 style={{ maskImage: "linear-gradient(transparent, black 10%, black 90%, transparent)", WebkitMaskImage: "linear-gradient(transparent, black 10%, black 90%, transparent)" }}
               >
                 {allLyrics.length > 0 ? (
@@ -321,7 +321,7 @@ export default function MusicPage() {
                       <div
                         key={i}
                         ref={i === activeLyricIndex ? activeLyricRef : null}
-                        className={`max-w-full break-words whitespace-normal overflow-hidden text-center transition-all duration-300 cursor-pointer select-none ${
+                        className={`block w-full min-w-0 max-w-full break-words whitespace-normal overflow-hidden text-center transition-all duration-300 cursor-pointer select-none ${
                           i === activeLyricIndex
                             ? "text-base md:text-xl font-black text-indigo-600 dark:text-indigo-300 scale-105 drop-shadow-sm"
                             : i < activeLyricIndex
