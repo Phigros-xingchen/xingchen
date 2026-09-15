@@ -203,7 +203,7 @@ export default function MusicPage() {
             {/* Progress */}
             <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
               <span className="text-[10px] md:text-xs text-slate-600 dark:text-slate-300 font-bold w-8 md:w-10 text-right tabular-nums">{formatTime(currentTime)}</span>
-              <div className="flex-1 relative group">
+              <div className="flex-1 min-w-0 relative group">
                 <div className="h-1.5 bg-slate-200/80 dark:bg-slate-600/50 rounded-full overflow-hidden">
                   <div className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all" style={{ width: `${progress}%` }} />
                 </div>
