@@ -312,7 +312,7 @@ export default function MusicPage() {
             <MusicCard>
               <div
                 ref={lyricContainerRef}
-                className="h-[280px] md:h-[400px] overflow-y-auto"
+                className="w-full min-w-0 max-w-full h-[280px] md:h-[400px] overflow-x-hidden overflow-y-auto"
                 style={{ maskImage: "linear-gradient(transparent, black 10%, black 90%, transparent)", WebkitMaskImage: "linear-gradient(transparent, black 10%, black 90%, transparent)" }}
               >
                 {allLyrics.length > 0 ? (
@@ -321,7 +321,7 @@ export default function MusicPage() {
                       <div
                         key={i}
                         ref={i === activeLyricIndex ? activeLyricRef : null}
-                        className={`text-center transition-all duration-300 cursor-pointer select-none ${
+                        className={`max-w-full break-words whitespace-normal overflow-hidden text-center transition-all duration-300 cursor-pointer select-none ${
                           i === activeLyricIndex
                             ? "text-base md:text-xl font-black text-indigo-600 dark:text-indigo-300 scale-105 drop-shadow-sm"
                             : i < activeLyricIndex
