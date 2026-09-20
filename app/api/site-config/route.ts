@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma";
 import { getCurrentUser } from "@/app/lib/auth";
 import { clearSiteConfigCache } from "@/app/lib/site-config-db";
+import { DEFAULT_SITE_CONFIGS } from "@/app/lib/default-site-config";
 
 // 强制动态渲染，不缓存任何内容
 export const dynamic = "force-dynamic";
@@ -11,6 +12,12 @@ export async function GET() {
   const result: Record<string, string> = {};
   for (const c of configs) {
     result[c.key] = c.value;
+  }
+  // 合并默认配置清单：数据库缺失的键使用默认值，保证前台始终可读取（如 websiteUrl）
+  for (const def of DEFAULT_SITE_CONFIGS) {
+    if (result[def.key] === undefined) {
+      result[def.key] = def.value;
+    }
   }
   return NextResponse.json(result, {
     headers: {

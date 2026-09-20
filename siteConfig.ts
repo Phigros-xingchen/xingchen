@@ -10,6 +10,9 @@ export const siteConfig = {
   // 头像设置
   avatarUrl: "",
 
+  // 头像点击跳转链接（后台站点配置 websiteUrl，空则不跳转）
+  websiteUrl: "",
+
   // 背景设置
   useGradient: false,
   themeColors: ["#a18cd1", "#fbc2eb", "#a1c4fd", "#c2e9fb"],

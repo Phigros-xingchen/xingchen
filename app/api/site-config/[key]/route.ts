@@ -59,7 +59,11 @@ export async function DELETE(
     clearSiteConfigCache();
     return NextResponse.json({ code: 0, message: "success" });
   } catch (err: unknown) {
+    // 数据库无记录的虚拟配置项（默认清单合并项）删除时视为成功，避免报错
     const message = err instanceof Error ? err.message : "未知错误";
+    if (message.includes("P2025") || message.includes("not found")) {
+      return NextResponse.json({ code: 0, message: "success" });
+    }
     return NextResponse.json({ code: 1, message }, { status: 401 });
   }
 }

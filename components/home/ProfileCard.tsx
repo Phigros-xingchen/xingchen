@@ -20,6 +20,7 @@ export default function ProfileCard({
   photoCount?: number;
 }) {
   const avatarUrl = useConfigValue("avatarUrl", siteConfig.avatarUrl);
+  const websiteUrl = useConfigValue("websiteUrl", siteConfig.websiteUrl);
   const authorName = useConfigValue("authorName", siteConfig.authorName);
   const bio = useConfigValue("bio", siteConfig.bio);
   const github = useConfigValue("social_github", siteConfig.social?.github);
@@ -80,13 +81,18 @@ export default function ProfileCard({
       <div className="flex items-start justify-between relative z-10">
         <div className="flex items-center gap-4 md:gap-6">
           <div className="flex-shrink-0">
-            <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-tr from-sky-400 via-indigo-400 to-purple-400 p-[3px] shadow-lg transition-all duration-500 hover:shadow-xl hover:scale-110 hover:rotate-6 cursor-pointer">
-              <img
-                src={avatarUrl}
-                alt="avatar"
-                className="w-full h-full rounded-full object-cover bg-white dark:bg-slate-800"
-              />
-            </div>
+            {websiteUrl ? (
+              <a
+                href={websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={websiteUrl}
+              >
+                <AvatarBlock avatarUrl={avatarUrl} />
+              </a>
+            ) : (
+              <AvatarBlock avatarUrl={avatarUrl} />
+            )}
           </div>
           <div>
             <h1 className="text-xl md:text-3xl font-bold text-slate-900 dark:text-white mb-1 md:mb-2 tracking-wider transition-colors duration-700">
@@ -128,6 +134,18 @@ export default function ProfileCard({
           {youtube && <SocialBtn type="youtube" url={youtube} />}
         </div>
       </div>
+    </div>
+  );
+}
+
+function AvatarBlock({ avatarUrl }: { avatarUrl: string }) {
+  return (
+    <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-tr from-sky-400 via-indigo-400 to-purple-400 p-[3px] shadow-lg transition-all duration-500 hover:shadow-xl hover:scale-110 hover:rotate-6 cursor-pointer">
+      <img
+        src={avatarUrl}
+        alt="avatar"
+        className="w-full h-full rounded-full object-cover bg-white dark:bg-slate-800"
+      />
     </div>
   );
 }
